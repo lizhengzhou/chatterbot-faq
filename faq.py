@@ -1,7 +1,15 @@
 ﻿from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 import logging
+import sys
+import io
 
+# if 'cp65001' != sys.stdin.encoding != 'utf-8':
+#     sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf8')
+# if 'cp65001' != sys.stdout.encoding != 'utf-8':
+#     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf8')
+# if 'cp65001' != sys.stderr.encoding != 'utf-8':
+#     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf8')
 
 '''
 This is an example showing how to train a chat bot using the
@@ -20,12 +28,14 @@ chatbot.train(
     "./data/"
 )
 
+
 # Now let's get a response to a greeting
-##response = chatbot.get_response('在？')
-##print(response)
+# print(chatbot.get_response('在？'))
 
 lineCounter=1
 
 while True:
-    print(chatbot.get_response(input("(" + str(lineCounter) + ") user:")))
+    inputStr = input("(" + str(lineCounter) + ") user:")
+    answer=chatbot.get_response(inputStr)
+    print(answer)
     lineCounter += 1
